@@ -10,8 +10,8 @@ import React, {useState} from 'react';
 
 function TodoExtension() {
     const base = useBase();
-    const [tableName, setTableName] = useState('Tasks');
-    const table = base.getTableByNameIfExists(tableName);
+    const [tableId, setTableId] = useState(null);
+    const table = base.getTableByIdIfExists(tableId);
     const records = useRecords(table);
 
     const tasks = records ? records.map(record => (
@@ -23,8 +23,8 @@ function TodoExtension() {
             <TablePicker
                 table={table}
                 onChange={newTable => {
-                        setTableName(newTable.name);
-                    }}
+                    setTableId(newTable.id)
+                }}
             />
             {tasks}
         </div>

@@ -10,8 +10,16 @@ function TodoExtension() {
     const table = base.getTableByName('Tasks');
     const records = useRecords(table);
 
+    const tasks = records.map(record => {
+        return (
+            <div key={record.id}>
++               {record.name || 'Unnamed record'}
++           </div>
+        );
+    });
+
     return (
-        <div>Number of tasks: {records.length}</div>
+        <div>{tasks}</div>
     );
 }
 

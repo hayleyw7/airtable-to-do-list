@@ -3,21 +3,31 @@ import {
     useBase,
     useRecords,
     expandRecord,
+    TablePicker,
     TextButton,
 } from '@airtable/blocks/ui';
-import React from 'react';
+import React, {useState} from 'react';
 
 function TodoExtension() {
     const base = useBase();
-    const table = base.getTableByNameIfExists('Tasks');
+    const [tableName, setTableName] = useState('Tasks');
+    const table = base.getTableByNameIfExists(tableName);
     const records = useRecords(table);
 
-    const tasks = records ? records.map(record => {
-        return <Task key={record.id} record={record} />;
-    }) : null;
+    const tasks = records ? records.map(record => (
+        <Task key={record.id} record={record} />
+    )) : null;
 
     return (
-        <div>{tasks}</div>
+        <div>
+            <TablePicker
+                table={table}
+                onChange={newTable => {
+                        setTableName(newTable.name);
+                    }}
+            />
+            {tasks}
+        </div>
     );
 }
 

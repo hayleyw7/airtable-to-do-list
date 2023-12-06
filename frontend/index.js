@@ -25,15 +25,25 @@ function TodoExtension() {
 
 function Task({record}) {
     return (
-        <div>
+       <div
+           style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: 18,
+                padding: 12,
+                borderBottom: '1px solid #ddd',
+            }}
+       >
             {record.name || 'Unnamed record'}
-           <TextButton
-               icon="expand"
-               aria-label="Expand record"
-               onClick={() => {
+            <TextButton
+                icon="expand"
+                aria-label="Expand record"
+               variant="dark"
+                onClick={() => {
                     expandRecord(record);
                 }}
-           />
+            />
         </div>
     );
 }
